@@ -67,6 +67,8 @@ function loadImage(e) {
 
 function sliceImage() {
   console.log('Fatiando Imagem');
+  elementEmpty("slicedElements");
+  imageSlices = [];
   for (var x = 0; x < numColsToCut; x++) {
     for (var y = 0; y < numRowsToCut; y++) {
       var canvas = document.createElement('canvas');
@@ -135,8 +137,13 @@ function btnSetToProcessing(e) {
 function btnReset(e) {
   //Mockup of remove spinner thingy
   document.querySelectorAll('.spinner-grow').forEach(item => {
-    console.log("Found")
+    //console.log("Found")
     item.remove();
     item.remove();
   })
+}
+
+function elementEmpty(elementID){
+  /**Seta o conteúdo do elemento para em branco */
+  document.getElementById(elementID).innerHTML = "";
 }
