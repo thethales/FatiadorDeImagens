@@ -10,8 +10,11 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [ ] Seleção Manual de Largura e Altura da Fatia
+- [ ] Validações de operação básicas
 - [ ] Logotipo
-- [ ] Interface
+- [ ] Instruções de uso na página principal
+- [ ] Função de Download de *zip* contendo as imagens
+- [ ] Melhoria de Interface do Usuário
 
 
 ## 💻 Pré-requisitos
