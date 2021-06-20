@@ -16,8 +16,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ## 💻 Pré-requisitos
 
-Um navegador compatível com HTML5 e [Javascript](https://en.wikipedia.org/wiki/ECMAScript)
-
+- Um navegador compatível com HTML5 e [Javascript](https://en.wikipedia.org/wiki/ECMAScript)
+- Pronto ! Basta acessar o link [graciosamente fornecido](https://pages.github.com/ ) pelo Github: [https://thethales.github.io/FatiadorDeImagens/](https://thethales.github.io/FatiadorDeImagens/)
 
 ## 📫 Contribuindo
 
