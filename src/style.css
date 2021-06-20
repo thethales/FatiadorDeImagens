@@ -1,0 +1,10 @@
+
+#canvasImageToSlice{
+  visibility: hidden;
+}
+
+
+.img-slice{
+  border-radius: 10px;
+  padding: 5px;
+}
