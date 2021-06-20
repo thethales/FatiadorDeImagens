@@ -11,6 +11,7 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
+  <link href="css/" rel="stylesheet" />
   <!-- Custom CSS -->
   <link href="src/style.css" rel="stylesheet" />
 </head>
@@ -49,7 +50,35 @@
       <h1>Fatiador de Imagens</h1>
       <p class="lead">Corte uma imagem diretamente no seu navegador.</p>
       <p>Corte imagens para Instagram</p>
-      <input type="file" id="inputImageToSlice" />
+
+
+
+     
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Colunas</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Quantidade de colunas para cortar a imagem">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Linhas</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Quantidade de linhas para cortar a imagem">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Imagem</span>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputImageToSlice">
+          <label class="custom-file-label" for="inputGroupFile01">Selecionar um Arquivo</label>
+        </div>
+      </div>
+      
+
       <button id="btnFatiar" type="button" class="btn btn-primary processingButton">
         <span class="sr-only">Fatiar</span>
       </button>
