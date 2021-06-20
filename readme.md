@@ -13,6 +13,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Validações de operação básicas
 - [ ] Logotipo
 - [ ] Instruções de uso na página principal
+- [ ] Otimização de uso para dispositivos móveis
 - [ ] Função de Download de *zip* contendo as imagens
 - [ ] Melhoria de Interface do Usuário
 
