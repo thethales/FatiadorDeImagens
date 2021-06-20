@@ -1,7 +1,7 @@
 # Fatiador de Imagens
 
 
-<img src="exemplo-image.png" alt="exemplo imagem">
+<!--<img src="exemplo-image.png" alt="exemplo imagem">-->
 
 > Uma aplicação HTML5 para fatiar imagens no seu navegador ou celular
 
