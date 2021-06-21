@@ -1,5 +1,12 @@
 //Default Values
 var srcTestImage = 'testing/Ensaio de Feed 1.png';
+var defaultNumColsToCut = 3;
+var defaultNumRowsToCut = 4;
+
+var slicer = {
+  numColsToCut : defaultNumColsToCut,
+  numRowsToCut : defaultNumRowsToCut,
+}
 
 //Elements
 
@@ -24,7 +31,8 @@ var widthOfSlice, numRowsToCut, numColsToCut, numRowsToCut;
 
 fileInput.addEventListener('change', loadFile);
 image.addEventListener('load', loadImage);
-btnFatiar.addEventListener('click', sliceImage);
+btnFatiar.addEventListener('click', calculateSliceParamenters);
+btnFatiar.addEventListener('click', sliceImage);  
 btnDownload.addEventListener('click', downloadImages);
 btnTeste.addEventListener('click', loadDummyImage);
 
@@ -57,20 +65,16 @@ function loadDummyImage(e) {
 }
 
 function loadImage(e) {
-  numColsToCut = 3;
-  numRowsToCut = 4;
-  widthOfSlice = image.width / numColsToCut;
-  heightOfSlice = image.height / numRowsToCut;
-  console.log([widthOfSlice, heightOfSlice, image.width, image.height])
+  calculateSliceParamenters();  
 }
 
 
 function sliceImage() {
   console.log('Fatiando Imagem');
-  elementEmpty("slicedElements");
+  //elementEmpty("slicedElements");
   imageSlices = [];
-  for (var x = 0; x < numColsToCut; x++) {
-    for (var y = 0; y < numRowsToCut; y++) {
+  for (var x = 0; x < slicer.numColsToCut; x++) {
+    for (var y = 0; y < slicer.numRowsToCut; y++) {
       var canvas = document.createElement('canvas');
       canvas.width = widthOfSlice;
       canvas.height = heightOfSlice;
@@ -94,8 +98,8 @@ function insertImage(imgElement, imgURLs) {
 
   //Extremelly creative named variables
   var outputDiv = document.getElementById("slicedElements");
-  var cols = numColsToCut;
-  var rows = numRowsToCut;
+  var cols = slicer.numColsToCut;
+  var rows = slicer.numRowsToCut;
   var imgs = imgURLs.length;
 
   for (var r = 0; r < rows; r++) {
@@ -126,6 +130,25 @@ function insertImage(imgElement, imgURLs) {
 
 //UI and Auxiliary
 
+function calculateSliceParamenters(){
+  slicer.numColsToCut = isEmpty(document.getElementById('inputTxtCols').value) ? defaultNumColsToCut : document.getElementById('inputTxtCols').value;
+  slicer.numRowsToCut = isEmpty(document.getElementById('inputTxtRows').value) ? defaultNumRowsToCut : document.getElementById('inputTxtRows').value;
+  widthOfSlice = image.width / slicer.numColsToCut;
+  heightOfSlice = image.height / slicer.numRowsToCut;
+  printImageSettingsToUI({
+    "Largura da Fatia":widthOfSlice,
+    "Altura da Fatia":heightOfSlice,
+    "Altura da Imagem":image.width,
+    "Largura da Imagem":image.height,
+    "Número de Colunas":slicer.numColsToCut,
+    "Número de Linhas":slicer.numRowsToCut
+  });
+}
+
+function printImageSettingsToUI(imgSettingsObj){
+  console.log(imgSettingsObj);//Do pretty stuff instead
+}
+
 function btnSetToProcessing(e) {
   var newSpan = document.createElement("span");
   newSpan.setAttribute("class", "spinner-grow spinner-grow-sm");
@@ -138,12 +161,20 @@ function btnReset(e) {
   //Mockup of remove spinner thingy
   document.querySelectorAll('.spinner-grow').forEach(item => {
     //console.log("Found")
-    item.remove();
-    item.remove();
+    //item.remove();
+    //item.remove();
   })
 }
 
 function elementEmpty(elementID){
   /**Seta o conteúdo do elemento para em branco */
   document.getElementById(elementID).innerHTML = "";
+}
+
+function isEmpty(value){
+  if( typeof value === 'undefined' ) {
+    return true;
+  }else{
+    return false;
+  }
 }
