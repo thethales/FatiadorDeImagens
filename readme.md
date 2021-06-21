@@ -9,19 +9,29 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Seleção Manual de Largura e Altura da Fatia
-- [ ] Validações de operação básicas
-- [ ] Logotipo
+- [x] Seleção manual da quantidade de colunas e linhas 
+- [ ] Seleção manual de Largura e Altura da fatia
+- [ ] Validações de operação básicas (Erros e entrada do usuário)
 - [ ] Instruções de uso na página principal
+- [ ] Logotipo
 - [ ] Otimização de uso para dispositivos móveis
 - [ ] Função de Download de *zip* contendo as imagens
-- [ ] Melhoria de Interface do Usuário
+- [ ] Melhoria de Interface do Usuário foncando na intuitividade
+- [ ] Melhoria de Interface do Usuário foncando no design
+- [ ] Criação de uma biblioteca JS leve para fatiamento de imagens
 
 
 ## 💻 Pré-requisitos
 
 - Um navegador compatível com HTML5 e [Javascript](https://en.wikipedia.org/wiki/ECMAScript)
-- Pronto ! Basta acessar o link [graciosamente fornecido](https://pages.github.com/ ) pelo Github: [https://thethales.github.io/FatiadorDeImagens/](https://thethales.github.io/FatiadorDeImagens/)
+
+## ✔️ Como Utilizar
+- Basta acessar o link ([graciosamente fornecido](https://pages.github.com/ ) pelo Github): [https://thethales.github.io/FatiadorDeImagens/](https://thethales.github.io/FatiadorDeImagens/)
+- Digitar o número de colunas e linhas desejado para fatiamento da imagem
+- Carregar a imagem 
+- Clicar no botão _Fatiar_
+
+Todo o processamento é feito no próprio navegador do usuário, portanto a imagem não é enviada para nenhum servidor na internet.
 
 ## 📫 Contribuindo
 
@@ -32,4 +42,4 @@ Contribuições e sugestões são bem-vindas. Enquanto não temos um documento c
 
 Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-[⬆ Voltar ao topo](#Fatiador de Imagens)<br>
+[Voltar ao topo](#Fatiador-de-Imagens)<br>
