@@ -71,7 +71,7 @@ function loadImage(e) {
 
 function sliceImage() {
   console.log('Fatiando Imagem');
-  //elementEmpty("slicedElements");
+  
   imageSlices = [];
   for (var x = 0; x < slicer.numColsToCut; x++) {
     for (var y = 0; y < slicer.numRowsToCut; y++) {
@@ -83,7 +83,8 @@ function sliceImage() {
       imageSlices.push(canvas.toDataURL());
     }
   }
-  insertImage('slicedImage', imageSlices)
+  
+  insertImage('slicedElements', imageSlices)
 }
 
 
@@ -93,11 +94,13 @@ function downloadImages() {
 }
 
 
-function insertImage(imgElement, imgURLs) {
+function insertImage(outputDivId, imgURLs) {
   console.log('Inserindo Imagens');
 
+  elementEmpty(outputDivId);
+
   //Extremelly creative named variables
-  var outputDiv = document.getElementById("slicedElements");
+  var outputDiv = document.getElementById(outputDivId);
   var cols = slicer.numColsToCut;
   var rows = slicer.numRowsToCut;
   var imgs = imgURLs.length;
@@ -172,7 +175,7 @@ function elementEmpty(elementID){
 }
 
 function isEmpty(value){
-  if( typeof value === 'undefined' ) {
+  if( typeof value === 'undefined' || value == "" ) {
     return true;
   }else{
     return false;
