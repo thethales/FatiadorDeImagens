@@ -6,6 +6,14 @@ var defaultNumRowsToCut = 4;
 var slicer = {
   numColsToCut : defaultNumColsToCut,
   numRowsToCut : defaultNumRowsToCut,
+  resetSlicesColsRows : function(){
+    this.numColsToCut = defaultNumColsToCut;
+    this.numRowsToCut = defaultNumRowsToCut;
+  }
+}
+
+var uiMsgList = {
+  TooManyDamnColumns : "Atenção, um número de colunas ou linhas superior a 100 poderá gerar baixo desempenho ou travar a página. Você tem certeza que deseja prosseguir ?"
 }
 
 //Elements
@@ -134,8 +142,20 @@ function insertImage(outputDivId, imgURLs) {
 //UI and Auxiliary
 
 function calculateSliceParamenters(){
-  slicer.numColsToCut = isEmpty(document.getElementById('inputTxtCols').value) ? defaultNumColsToCut : document.getElementById('inputTxtCols').value;
-  slicer.numRowsToCut = isEmpty(document.getElementById('inputTxtRows').value) ? defaultNumRowsToCut : document.getElementById('inputTxtRows').value;
+  
+  let numCols = isEmpty(document.getElementById('inputTxtCols').value) ? defaultNumColsToCut : document.getElementById('inputTxtCols').value;
+  let numRows = isEmpty(document.getElementById('inputTxtRows').value) ? defaultNumRowsToCut : document.getElementById('inputTxtRows').value;
+  
+  slicer.numColsToCut =  numCols;
+  slicer.numRowsToCut =  numRows;
+
+  if ((numCols >= 100 || numRows >= 100)){
+    let userConfirmation = confirm(uiMsgList.TooManyDamnColumns);
+    if(!userConfirmation){
+      slicer.resetSlicesColsRows();
+    }
+  }
+  
   widthOfSlice = image.width / slicer.numColsToCut;
   heightOfSlice = image.height / slicer.numRowsToCut;
   printImageSettingsToUI({
