@@ -149,6 +149,14 @@ function calculateSliceParamenters(){
   slicer.numColsToCut =  numCols;
   slicer.numRowsToCut =  numRows;
 
+  //Move this part to object 
+  if (numCols == 0){
+    slicer.numColsToCut = 1;
+  }
+  if (numRows == 0){
+    slicer.numRowsToCut = 1;
+  }
+
   if ((numCols >= 100 || numRows >= 100)){
     let userConfirmation = confirm(uiMsgList.TooManyDamnColumns);
     if(!userConfirmation){
