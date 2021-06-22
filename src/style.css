@@ -8,10 +8,6 @@
     position: relative !important;
   }
 
-  .arrow-up {
-    visibility: visible !important;
-  }
-
 }
 
 #canvasImageToSlice {
@@ -58,7 +54,6 @@
 }
 
 .arrow-up {
-  visibility: hidden;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
