@@ -1,48 +1,67 @@
-@media only screen and (max-width: 450px){
+@media only screen and (max-width: 450px) {
 
-    .sticky-top{
-      position: relative !important;
-    }
+  .sticky-top {
+    position: relative !important;
+  }
 
-    .stick {
-        position: relative !important;
-    }
+  .stick {
+    position: relative !important;
+  }
+
+  .arrow-up {
+    visibility: visible !important;
+  }
 
 }
 
-#canvasImageToSlice{
+#canvasImageToSlice {
   visibility: hidden;
 }
 
-#container-separador > div{
-  border-left:1px dashed #4e4e4e;
-  margin:auto;
-  
-  width:1px;
+#container-separador .separador {
+  border-left: 1px dashed #4e4e4e;
+  margin: auto;
+
+  width: 1px;
   height: 90%;
-  color:white;
-  
+  color: white;
+
 }
 
-.img-slice{
+#container-separador .arrow-up {
+  margin: auto;
+  width: 1px;
+  height: 90%;
+}
+
+.img-slice {
   border-radius: 10px;
   padding: 5px;
 }
 
-.logo{
+.logo {
   width: 240px;
 }
 
-.img-slice-placeholder{
+.img-slice-placeholder {
   width: 150px;
   background-color: #e9e9e99c;
-  color:#7c7c7c;
+  color: #7c7c7c;
   font-size: 1rem;
   height: 150px;
   text-align: center;
 }
 
-.img-slice-placeholder span{
+.img-slice-placeholder span {
 
   margin: auto auto;
+}
+
+.arrow-up {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
 }
