@@ -181,11 +181,11 @@ function printImageSettingsToUI(imgSettingsObj){
 }
 
 function btnSetToProcessing(e) {
-  var newSpan = document.createElement("span");
-  newSpan.setAttribute("class", "spinner-grow spinner-grow-sm");
-  newSpan.setAttribute("role", "status");
-  newSpan.setAttribute("aria-hidden", "sttrueatus");
-  this.appendChild(newSpan);
+  //var newSpan = document.createElement("span");
+  //newSpan.setAttribute("class", "spinner-grow spinner-grow-sm");
+  //newSpan.setAttribute("role", "status");
+  //newSpan.setAttribute("aria-hidden", "sttrueatus");
+  //this.appendChild(newSpan);
 }
 
 function btnReset(e) {
