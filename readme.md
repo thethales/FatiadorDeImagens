@@ -11,6 +11,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - [x] Seleção manual da quantidade de colunas e linhas 
 - [ ] Seleção manual de Largura e Altura da fatia
+- [ ] Presets de corte + Mockups de Grids
 - [ ] Validações de operação básicas (Erros e entrada do usuário)
 - [ ] Instruções de uso na página principal
 - [ ] Logotipo
