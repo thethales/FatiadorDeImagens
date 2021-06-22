@@ -1,3 +1,14 @@
+@media only screen and (max-width: 450px){
+
+    .sticky-top{
+      position: relative !important;
+    }
+
+    .stick {
+        position: relative !important;
+    }
+
+}
 
 #canvasImageToSlice{
   visibility: hidden;
