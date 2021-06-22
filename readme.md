@@ -14,7 +14,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Presets de corte + Mockups de Grids
 - [ ] Validações de operação básicas (Erros e entrada do usuário)
 - [ ] Instruções de uso na página principal
-- [ ] Logotipo
+- [x] Logotipo
 - [ ] Otimização de uso para dispositivos móveis
 - [ ] Função de Download de *zip* contendo as imagens
 - [ ] Melhoria de Interface do Usuário foncando na intuitividade
