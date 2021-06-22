@@ -4,6 +4,17 @@
 }
 
 
+#container-separador > div{
+  border-left:1px dashed #4e4e4e;
+  margin:auto;
+  
+  width:1px;
+  height: 90%;
+  color:white;
+  
+}
+
+
 .img-slice{
   border-radius: 10px;
   padding: 5px;
@@ -12,3 +23,4 @@
 .logo{
   width: 240px;
 }
+

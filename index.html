@@ -13,71 +13,105 @@
   <link href="vendor/css/styles.css" rel="stylesheet" />
   <link href="vendor/css/bootstrap.min.css" rel="stylesheet" />
   <link href="vendor/css/bootstrap-utilities.css" rel="stylesheet" />
-  
+
   <!-- Custom CSS -->
   <link href="src/style.css" rel="stylesheet" />
 </head>
 
 <body>
-  
+
   <!-- Page content-->
   <div class="container">
-    <div class="text-center mt-5">
-      
-      <h1><img src="assets/logo.png" alt="Logotipo Fatiador de Imagens" class="mx-auto d-block logo">Fatiador de Imagens</h1>
-      <p class="lead">Corte uma imagem diretamente no seu navegador.</p>
-      <p>Corte imagens para Instagram</p>
+
+    <div class="row text-center mt-5">
+
+
+      <div class="col-sm-4">
+        <h1><img src="assets/logo.png" alt="Logotipo Fatiador de Imagens" class="mx-auto d-block logo">Fatiador de
+          Imagens
+        </h1>
+        <p class="lead">Corte uma imagem diretamente no seu navegador.</p>
+        <p>Corte imagens para Instagram</p>
 
 
 
-     
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Colunas</span>
-        </div>
-        <input type="number" step="0" placeholder="3" class="form-control" id="inputTxtCols" aria-label="Quantidade de colunas para cortar a imagem">
+        <form>
+          <div class="form-group col-sm-12">
+            <div class="row">
+
+              <div class="col col-sm-6">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Colunas</span>
+                  </div>
+                  <input type="number" step="0" tabindex="1" placeholder="3" class="form-control form-control-sm"
+                    id="inputTxtCols" aria-label="Quantidade de colunas para cortar a imagem">
+                </div>
+              </div>
+
+              <div class="col col-sm-6">
+                <div class="input-group mb-3 ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Linhas</span>
+                  </div>
+                  <input type="number" step="0" tabindex="2" placeholder="4" class="form-control form-control-sm"
+                    id="inputTxtRows" aria-label="Quantidade de linhas para cortar a imagem">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row ">
+              <div class="input-group mb-3">
+                <!--<div class="input-group-prepend">
+                <span class="input-group-text">Imagem</span>
+              </div>-->
+                <div class="custom-file">
+                  <input type="file" tabindex="3" class="custom-file-input form-control form-control-sm"
+                    id="inputImageToSlice">
+                  <label class="custom-file-label" for="inputGroupFile01"></label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-row ">
+              <button id="btnFatiar" type="button" tabindex="4" class="btn btn-primary processingButton">
+                <span class="sr-only"
+                  alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Fatiar</span>
+              </button>
+              <!--<button id="btnDownload" type="button" class=" invisible btn-primary processingButton">
+              <span class="sr-only">Download</span>
+            </button>
+            <button id="btnTeste" type="button" class="invisible btn btn-primary processingButton">
+              <span class="sr-only">Teste</span>
+            </button>-->
+
+            </div>
+          </div>
+        </form>
+
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Linhas</span>
-        </div>
-        <input type="number" step="0" placeholder="4" class="form-control" id="inputTxtRows" aria-label="Quantidade de linhas para cortar a imagem">
+      <div class="col-sm-1" id="container-separador">
+        <div class="">Fatiador de Imagens</div>
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Imagem</span>
-        </div>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="inputImageToSlice">
-          <label class="custom-file-label" for="inputGroupFile01">Selecionar um Arquivo</label>
+      <div class="col-sm-7">
+        <img id="slicedImage"></img>
+        <div class="container">
+          <div class="row" id="slicedElements">
+
+          </div>
+          <canvas width="400" height="300" id="canvasImageToSlice" />
         </div>
       </div>
-      
 
-      <button id="btnFatiar" type="button" class="btn btn-primary processingButton">
-        <span class="sr-only" alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Fatiar</span>
-      </button>
-      <button id="btnDownload" type="button" class=" invisible btn-primary processingButton">
-        <span class="sr-only">Download</span>
-      </button>
-      <button id="btnTeste" type="button" class="invisible btn btn-primary processingButton">
-        <span class="sr-only">Teste</span>
-      </button>
-
-
-      <img id="slicedImage"></img>
-      <div class="container">
-        <div class="row"  id="slicedElements">
-
-        </div>
-      <canvas width="400" height="300" id="canvasImageToSlice" />
     </div>
-  </div>
-  <!-- Bootstrap core JS-->
-  <script src="vendor/js/bootstrap.bundle.min.js"></script>
-  <!-- Custom JS -->
-  <script src="src/script.js"></script>
+    <!-- Bootstrap core JS-->
+    <script src="vendor/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="src/script.js"></script>
 </body>
+
 </html>
