@@ -1,24 +1,27 @@
-//Default Values
+//Default & Global Values
 var srcTestImage = 'testing/Ensaio de Feed 1.png';
 var defaultNumColsToCut = 3;
 var defaultNumRowsToCut = 4;
+var defaultOutputDivID = 'slicedElements';
 
 var slicer = {
-  numColsToCut : defaultNumColsToCut,
-  numRowsToCut : defaultNumRowsToCut,
-  resetSlicesColsRows : function(){
+  numColsToCut: defaultNumColsToCut,
+  numRowsToCut: defaultNumRowsToCut,
+  resetSlicesColsRows: function () {
     this.numColsToCut = defaultNumColsToCut;
     this.numRowsToCut = defaultNumRowsToCut;
   }
 }
 
 var uiMsgList = {
-  TooManyDamnColumns : "Atenção, um número de colunas ou linhas superior a 100 poderá gerar baixo desempenho ou travar a página. Você tem certeza que deseja prosseguir ?"
+  TooManyDamnColumns: "Atenção, um número de colunas ou linhas superior a 100 poderá gerar baixo desempenho ou travar a página. Você tem certeza que deseja prosseguir ?"
 }
 
 //Elements
 
 var fileInput = document.getElementById('inputImageToSlice');
+var colInput = document.getElementById('inputTxtCols');
+var rowInput = document.getElementById('inputTxtRows');
 var btnFatiar = document.getElementById('btnFatiar');
 var btnDownload = document.getElementById('btnDownload');
 var btnTeste = document.getElementById('btnTeste');
@@ -38,11 +41,13 @@ var widthOfSlice, numRowsToCut, numColsToCut, numRowsToCut;
 //Event Listerners
 
 fileInput.addEventListener('change', loadFile);
+colInput.addEventListener('change', printGrid);
+rowInput.addEventListener('change', printGrid);
 image.addEventListener('load', loadImage);
 btnFatiar.addEventListener('click', calculateSliceParamenters);
-btnFatiar.addEventListener('click', sliceImage);  
-btnDownload.addEventListener('click', downloadImages);
-btnTeste.addEventListener('click', loadDummyImage);
+btnFatiar.addEventListener('click', printGrid);
+//btnDownload.addEventListener('click', downloadImages);
+//btnTeste.addEventListener('click', loadDummyImage);
 
 image.onload = function () {
   ctx.drawImage(image, 200, 200);
@@ -73,14 +78,16 @@ function loadDummyImage(e) {
 }
 
 function loadImage(e) {
-  calculateSliceParamenters();  
+  calculateSliceParamenters();
 }
 
+//-----------------------------------------------------------------------------
 
 function sliceImage() {
   console.log('Fatiando Imagem');
-  
+  calculateSliceParamenters();
   imageSlices = [];
+
   for (var x = 0; x < slicer.numColsToCut; x++) {
     for (var y = 0; y < slicer.numRowsToCut; y++) {
       var canvas = document.createElement('canvas');
@@ -91,8 +98,9 @@ function sliceImage() {
       imageSlices.push(canvas.toDataURL());
     }
   }
-  
-  insertImage('slicedElements', imageSlices)
+
+  insertImage(defaultOutputDivID, imageSlices)
+
 }
 
 
@@ -139,45 +147,92 @@ function insertImage(outputDivId, imgURLs) {
   document.dispatchEvent(eImagesWereInserted);
 }
 
-//UI and Auxiliary
+//UI
 
-function calculateSliceParamenters(){
-  
+function printGrid() {
+  if (image.src == "") {
+    printGridMockup();
+  } else {
+    sliceImage();
+  }
+}
+
+function calculateSliceParamenters() {
+
   let numCols = isEmpty(document.getElementById('inputTxtCols').value) ? defaultNumColsToCut : document.getElementById('inputTxtCols').value;
   let numRows = isEmpty(document.getElementById('inputTxtRows').value) ? defaultNumRowsToCut : document.getElementById('inputTxtRows').value;
-  
-  slicer.numColsToCut =  numCols;
-  slicer.numRowsToCut =  numRows;
+
+  slicer.numColsToCut = numCols;
+  slicer.numRowsToCut = numRows;
 
   //Move this part to object 
-  if (numCols == 0){
+  if (numCols == 0) {
     slicer.numColsToCut = 1;
   }
-  if (numRows == 0){
+  if (numRows == 0) {
     slicer.numRowsToCut = 1;
   }
 
-  if ((numCols >= 100 || numRows >= 100)){
+  if ((numCols >= 100 || numRows >= 100)) {
     let userConfirmation = confirm(uiMsgList.TooManyDamnColumns);
-    if(!userConfirmation){
+    if (!userConfirmation) {
       slicer.resetSlicesColsRows();
     }
   }
-  
+
   widthOfSlice = image.width / slicer.numColsToCut;
   heightOfSlice = image.height / slicer.numRowsToCut;
   printImageSettingsToUI({
-    "Largura da Fatia":widthOfSlice,
-    "Altura da Fatia":heightOfSlice,
-    "Altura da Imagem":image.width,
-    "Largura da Imagem":image.height,
-    "Número de Colunas":slicer.numColsToCut,
-    "Número de Linhas":slicer.numRowsToCut
+    "Largura da Fatia": widthOfSlice,
+    "Altura da Fatia": heightOfSlice,
+    "Altura da Imagem": image.width,
+    "Largura da Imagem": image.height,
+    "Número de Colunas": slicer.numColsToCut,
+    "Número de Linhas": slicer.numRowsToCut
   });
 }
 
-function printImageSettingsToUI(imgSettingsObj){
-  console.log(imgSettingsObj);//Do pretty stuff instead
+
+function printImageSettingsToUI(imgSettingsObj) {
+  console.log(imgSettingsObj); //Do pretty stuff instead
+
+}
+
+function printGridMockup() {
+
+
+  calculateSliceParamenters();
+
+  elementEmpty(defaultOutputDivID);
+  var outputDiv = document.getElementById(defaultOutputDivID);
+  var cols = slicer.numColsToCut;
+  var rows = slicer.numRowsToCut;
+  var slices = cols * rows;
+
+  for (var r = 0; r < rows; r++) {
+    let newDivRow = document.createElement("div");
+    newDivRow.setAttribute("class", "row");
+    newDivRow.setAttribute("id", "row" + r);
+
+    outputDiv.appendChild(newDivRow);
+  }
+
+  r = 0;
+  for (var i = 0; i < slices; i++) {
+    let newDiv = document.createElement("div");
+    let newSpan = document.createElement("span");
+
+    outputDiv = document.getElementById("row" + r);
+    newDiv.setAttribute("class", "col-sm card img-slice-placeholder");
+    newSpan.innerText = i;
+    newDiv.appendChild(newSpan);
+    outputDiv.appendChild(newDiv);
+    r++;
+    if (r == rows) {
+      r = 0;
+    }
+  }
+
 }
 
 function btnSetToProcessing(e) {
@@ -197,15 +252,18 @@ function btnReset(e) {
   })
 }
 
-function elementEmpty(elementID){
+
+// Auxiliares
+
+function elementEmpty(elementID) {
   /**Seta o conteúdo do elemento para em branco */
   document.getElementById(elementID).innerHTML = "";
 }
 
-function isEmpty(value){
-  if( typeof value === 'undefined' || value == "" ) {
+function isEmpty(value) {
+  if (typeof value === 'undefined' || value == "") {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
