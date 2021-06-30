@@ -37,8 +37,7 @@ body{
 }
 
 #loadArea {
-  border: 2px dashed #ccc;
-  border-radius: 20px;
+  
   width: 460px;
   padding: 20px;
   margin: 5px auto;
