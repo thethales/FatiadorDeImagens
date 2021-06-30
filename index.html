@@ -18,10 +18,10 @@
   <link href="src/style.css" rel="stylesheet" />
 </head>
 
-<body>
+<body id="dropArea">
 
   <!-- Page content-->
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row text-center mt-5">
 
@@ -31,14 +31,27 @@
           Imagens
         </h1>
         <p class="lead">Corte uma imagem diretamente no seu navegador.</p>
-        <p>Corte imagens para Instagram</p>
-
-
+        <p class="visually-hidden">Corte imagens para Instagram</p>
+        <p class="visually-hidden">Corte imagens para Facebook</p>
 
         <form>
           <div class="form-group col-sm-12">
             <div class="row">
 
+              <div class="col col-sm-12" id="loadArea">
+                <form class="dropForm">
+                  <p>Arraste uma imagem aqui ou clique para carregar uma imagem manualmente</p>
+                  <input type="file" tabindex="3" id="inputImageToSlice" accept="image/*">
+                  <label class="btn btn-primary processingButton" for="inputImageToSlice" alt="Selecionar uma imagem do seu dispositivo">Selecionar</label>
+                  <span>ou </span>
+                  <button id="btnFatiar" type="button" tabindex="4" class="btn btn-secondary processingButton" alt="Pré visualizar o layout de grades e linhas">
+                    <span class="sr-only" alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Pré
+                      Visualizar</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
               <div class="col col-sm-6">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -57,36 +70,27 @@
                   <input type="number" step="0" tabindex="2" placeholder="4" class="form-control form-control-sm"
                     id="inputTxtRows" aria-label="Quantidade de linhas para cortar a imagem">
                 </div>
+                
               </div>
 
             </div>
 
-            <div class="form-row ">
+            <!-- <div class="form-row ">
               <div class="input-group mb-3">
-                <!--<div class="input-group-prepend">
+                <div class="input-group-prepend">
                 <span class="input-group-text">Imagem</span>
-              </div>-->
+              </div>
                 <div class="custom-file">
                   <input type="file" tabindex="3" class="custom-file-input form-control form-control-sm"
                     id="inputImageToSlice">
                   <label class="custom-file-label" for="inputGroupFile01"></label>
                 </div>
               </div>
-            </div>
+            </div>-->
 
 
-            <div class="form-row ">
-              <button id="btnFatiar" type="button" tabindex="4" class="btn btn-primary processingButton">
-                <span class="sr-only"
-                  alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Fatiar</span>
-              </button>
-              <!--<button id="btnDownload" type="button" class=" invisible btn-primary processingButton">
-              <span class="sr-only">Download</span>
-            </button>
-            <button id="btnTeste" type="button" class="invisible btn btn-primary processingButton">
-              <span class="sr-only">Teste</span>
-            </button>-->
-
+            <div id="btnForm" class="form-row">
+              
             </div>
           </div>
         </form>
@@ -97,7 +101,9 @@
         <div class="separador">Fatiador de Imagens</div>
         <div class="arrow-up"></div>
       </div>
-
+      <!--<button id="btnDownload" type="button" class=" invisible btn-primary processingButton">
+              <span class="sr-only">Download</span>
+            </button>-->
       <div class="col-sm-7">
         <img id="slicedImage"></img>
         <div class="container">

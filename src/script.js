@@ -1,4 +1,5 @@
 //Default & Global Values
+//https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
 var srcTestImage = 'testing/Ensaio de Feed 1.png';
 var defaultNumColsToCut = 3;
 var defaultNumRowsToCut = 4;
@@ -19,12 +20,13 @@ var uiMsgList = {
 
 //Elements
 
-var fileInput = document.getElementById('inputImageToSlice');
-var colInput = document.getElementById('inputTxtCols');
-var rowInput = document.getElementById('inputTxtRows');
-var btnFatiar = document.getElementById('btnFatiar');
+var fileInput   = document.getElementById('inputImageToSlice');
+var colInput    = document.getElementById('inputTxtCols');
+var rowInput    = document.getElementById('inputTxtRows');
+var btnFatiar   = document.getElementById('btnFatiar');
 var btnDownload = document.getElementById('btnDownload');
-var btnTeste = document.getElementById('btnTeste');
+var btnTeste    = document.getElementById('btnTeste');
+var dropArea    = document.getElementById('dropArea');
 
 var eImagesWereInserted = new CustomEvent("imagesWereInserted", {
   "detail": "As imagens foram inseridas no DOM"
@@ -47,7 +49,8 @@ image.addEventListener('load', loadImage);
 btnFatiar.addEventListener('click', calculateSliceParamenters);
 btnFatiar.addEventListener('click', printGrid);
 //btnDownload.addEventListener('click', downloadImages);
-//btnTeste.addEventListener('click', loadDummyImage);
+dropArea.addEventListener('drop', droppedImage, false);
+
 
 image.onload = function () {
   ctx.drawImage(image, 200, 200);
@@ -63,6 +66,20 @@ document.addEventListener("imagesWereInserted", function (e) {
   btnReset(e);
 });
 
+//Handle Drag Area Events
+;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, preventDefaults, false)
+})
+
+;['dragenter', 'dragover'].forEach(eventName => {
+  dropArea.addEventListener(eventName, highlightDropArea, false)
+})
+
+;['dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, unhighlightDropArea, false)
+})
+
+dropArea.addEventListener('drop', droppedImage, false);
 //-----------------------------------------------------------------------------
 
 function loadFile(e) {
@@ -79,6 +96,12 @@ function loadDummyImage(e) {
 
 function loadImage(e) {
   calculateSliceParamenters();
+  sliceImage();
+}
+
+function droppedImage(e){
+  let dt = e.dataTransfer;
+  image.src = URL.createObjectURL(dt.files[0]);
 }
 
 //-----------------------------------------------------------------------------
@@ -103,12 +126,9 @@ function sliceImage() {
 
 }
 
-
-
 function downloadImages() {
   //base64toBlob(imageSlices[0],'png')
 }
-
 
 function insertImage(outputDivId, imgURLs) {
   console.log('Inserindo Imagens');
@@ -192,17 +212,13 @@ function calculateSliceParamenters() {
   });
 }
 
-
 function printImageSettingsToUI(imgSettingsObj) {
   console.log(imgSettingsObj); //Do pretty stuff instead
 
 }
 
 function printGridMockup() {
-
-
   calculateSliceParamenters();
-
   elementEmpty(defaultOutputDivID);
   var outputDiv = document.getElementById(defaultOutputDivID);
   var cols = slicer.numColsToCut;
@@ -252,6 +268,14 @@ function btnReset(e) {
   })
 }
 
+function highlightDropArea(e) {
+  dropArea.classList.add('highlight')
+}
+
+function unhighlightDropArea(e) {
+  dropArea.classList.remove('highlight')
+}
+
 
 // Auxiliares
 
@@ -266,4 +290,9 @@ function isEmpty(value) {
   } else {
     return false;
   }
+}
+
+function preventDefaults (e) {
+  e.preventDefault()
+  e.stopPropagation()
 }

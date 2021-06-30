@@ -10,6 +10,14 @@
 
 }
 
+p {
+  margin-top: 0;
+}
+
+body{
+ 
+}
+
 #canvasImageToSlice {
   visibility: hidden;
 }
@@ -17,17 +25,32 @@
 #container-separador .separador {
   border-left: 1px dashed #4e4e4e;
   margin: auto;
-
   width: 1px;
   height: 90%;
   color: white;
-
 }
 
 #container-separador .arrow-up {
   margin: auto;
   width: 1px;
   height: 90%;
+}
+
+#loadArea {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  width: 480px;
+  padding: 20px;
+  margin: 5px auto;
+  margin-bottom: 15px;
+}
+
+#inputImageToSlice {
+  display: none;
+}
+
+.slice-config{
+  margin: auto auto;
 }
 
 .img-slice {
@@ -59,4 +82,8 @@
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid black;
+}
+
+.highlight {
+  opacity: 0.8;
 }
