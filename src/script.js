@@ -25,7 +25,9 @@ var rowInput    = document.getElementById('inputTxtRows');
 var btnFatiar   = document.getElementById('btnFatiar');
 var btnDownload = document.getElementById('btnDownload');
 var btnTeste    = document.getElementById('btnTeste');
-var dropArea    = document.getElementById('dropArea');
+var dropArea           = document.getElementById('dropArea');
+var slicedElementsArea = document.getElementById('slicedElements');
+var containerSlicedElements = document.getElementById('containerSlicedElements');
 
 var eImagesWereInserted = new CustomEvent("imagesWereInserted", {
   "detail": "As imagens foram inseridas no DOM"
@@ -149,14 +151,16 @@ function insertImage(outputDivId, imgURLs) {
 
   r = 0;
   for (var i = 0; i < imgs; i++) {
-    var newDiv = document.createElement("div");
-    var newImage = document.createElement("img");
+    let newDiv = document.createElement("div");
+    let newImage = document.createElement("img");
+    let newSpan = document.createElement("span");
 
     outputDiv = document.getElementById("row" + r);
     newDiv.setAttribute("class", "col-sm card img-slice");
     newImage.setAttribute('src', imgURLs[i]);
+    newSpan.innerText = i;
     newDiv.appendChild(newImage);
-
+    newDiv.appendChild(newSpan);
     outputDiv.appendChild(newDiv);
     r++;
     if (r == rows) {
@@ -268,11 +272,11 @@ function btnReset(e) {
 }
 
 function highlightDropArea(e) {
-  dropArea.classList.add('highlight')
+  containerSlicedElements.classList.add('highlight')
 }
 
 function unhighlightDropArea(e) {
-  dropArea.classList.remove('highlight')
+  containerSlicedElements.classList.remove('highlight')
 }
 
 

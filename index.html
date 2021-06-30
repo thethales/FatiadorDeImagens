@@ -42,10 +42,13 @@
                 <form class="dropForm">
                   <p>Arraste uma imagem aqui ou clique para carregar uma imagem manualmente</p>
                   <input type="file" tabindex="3" id="inputImageToSlice" accept="image/*">
-                  <label class="btn btn-primary processingButton" for="inputImageToSlice" alt="Selecionar uma imagem do seu dispositivo">Selecionar</label>
+                  <label class="btn btn-primary processingButton" for="inputImageToSlice"
+                    alt="Selecionar uma imagem do seu dispositivo">Selecionar</label>
                   <span>ou </span>
-                  <button id="btnFatiar" type="button" tabindex="4" class="btn btn-secondary processingButton" alt="Pré visualizar o layout de grades e linhas">
-                    <span class="sr-only" alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Pré
+                  <button id="btnFatiar" type="button" tabindex="4" class="btn btn-secondary processingButton"
+                    alt="Pré visualizar o layout de grades e linhas">
+                    <span class="sr-only"
+                      alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Pré
                       Visualizar</span>
                   </button>
                 </form>
@@ -70,7 +73,7 @@
                   <input type="number" step="0" tabindex="2" placeholder="4" class="form-control form-control-sm"
                     id="inputTxtRows" aria-label="Quantidade de linhas para cortar a imagem">
                 </div>
-                
+
               </div>
 
             </div>
@@ -90,7 +93,7 @@
 
 
             <div id="btnForm" class="form-row">
-              
+
             </div>
           </div>
         </form>
@@ -106,10 +109,10 @@
             </button>-->
       <div class="col-sm-7">
         <img id="slicedImage"></img>
-        <div class="container">
-          <div class="row" id="slicedElements">
-
+        <div class="container" id="containerSlicedElements">
+          <div class="h-75 d-block" id="slicedElements">
           </div>
+
           <canvas width="400" height="300" id="canvasImageToSlice" />
         </div>
       </div>

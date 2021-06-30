@@ -39,7 +39,7 @@ body{
 #loadArea {
   border: 2px dashed #ccc;
   border-radius: 20px;
-  width: 480px;
+  width: 460px;
   padding: 20px;
   margin: 5px auto;
   margin-bottom: 15px;
@@ -47,10 +47,6 @@ body{
 
 #inputImageToSlice {
   display: none;
-}
-
-.slice-config{
-  margin: auto auto;
 }
 
 .img-slice {
@@ -69,11 +65,19 @@ body{
   font-size: 1rem;
   height: 150px;
   text-align: center;
+  position: relative;
+}
+
+.img-slice-placeholder img {
+  z-index: -100;
 }
 
 .img-slice-placeholder span {
-
+  z-index: 100;
   margin: auto auto;
+  position: absolute;
+  top: 50%;
+  left:50%;
 }
 
 .arrow-up {
@@ -85,5 +89,13 @@ body{
 }
 
 .highlight {
-  opacity: 0.8;
+  opacity: 0.2;
+  height: 75% !important;
+  display: block;
+  border: 1px dashed #4e4e4e;
+  border-radius: 20px;
+  background-color: #dfdfdf;
+  background-image: url("img/img_icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
