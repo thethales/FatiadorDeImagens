@@ -158,6 +158,7 @@ function insertImage(outputDivId, imgURLs) {
     outputDiv = document.getElementById("row" + r);
     newDiv.setAttribute("class", "col-sm card img-slice");
     newImage.setAttribute('src', imgURLs[i]);
+    newImage.setAttribute('name', i);
     newSpan.innerText = i;
     newDiv.appendChild(newImage);
     newDiv.appendChild(newSpan);
@@ -227,12 +228,12 @@ function printGridMockup() {
   var cols = slicer.numColsToCut;
   var rows = slicer.numRowsToCut;
   var slices = cols * rows;
+  var sliceWidth = (outputDiv.offsetWidth /cols)+'px';
 
   for (var r = 0; r < rows; r++) {
     let newDivRow = document.createElement("div");
     newDivRow.setAttribute("class", "row");
     newDivRow.setAttribute("id", "row" + r);
-
     outputDiv.appendChild(newDivRow);
   }
 
@@ -243,6 +244,8 @@ function printGridMockup() {
 
     outputDiv = document.getElementById("row" + r);
     newDiv.setAttribute("class", "col-sm card img-slice-placeholder");
+    newDiv.style["width"] = sliceWidth;
+    newDiv.style["height"] = sliceWidth;
     newSpan.innerText = i;
     newDiv.appendChild(newSpan);
     outputDiv.appendChild(newDiv);
