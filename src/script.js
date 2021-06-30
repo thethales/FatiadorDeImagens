@@ -1,5 +1,4 @@
 //Default & Global Values
-//https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
 var srcTestImage = 'testing/Ensaio de Feed 1.png';
 var defaultNumColsToCut = 3;
 var defaultNumRowsToCut = 4;
