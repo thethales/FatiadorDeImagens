@@ -74,7 +74,6 @@ dropArea.addEventListener('drop', droppedImage, false);
 image.onload = function () {
   ctx.drawImage(image, 200, 200);
   console.log("Imagem carregada: " + this.width + '-' + this.height)
-  console.log(this.name)
 }
 
 document.querySelectorAll('.processingButton').forEach(item => {
@@ -202,13 +201,15 @@ function downloadImages(zipName,slicesFolderName){
   var img = zip.folder(slicesFolderName);
   for(var i=0; i<imageSlices.length; i++){
     let imgData = imageSlices[i];
-    img.file(i+".jpg", imgData.replace(/^data:image\/(png|jpg);base64,/, ""), {base64: true});
+        imgData = imgData.replace(/^data:image\/(png|jpg|gif|jpeg|webp);base64,/, "");
+
+    let imgName = "fatia" + i + base64ContentFileFormatIndex(imgData);
+    img.file(imgName, imgData , {base64: true});
 
   }
   zip.generateAsync({type:"blob"})
   .then(function(content) {
-      // see FileSaver.js
-      saveAs(content, zipName);
+      saveAs(content, zipName);// see FileSaver.js
   });
 }
 
@@ -407,6 +408,30 @@ function isEmpty(value) {
 function preventDefaults (e) {
   e.preventDefault()
   e.stopPropagation()
+}
+
+
+function base64ContentFileFormatIndex(base64content){
+  /**
+   * Return the file type, based on the heading character on the base64 content that is not the complete URI
+   * @param {string} base64content - The imcomplete URI, corresponds only to the base64 content
+   * @return {string} - Returns a dot concatenated with the file extension
+   * 
+   * Based on: https://stackoverflow.com/questions/27886677/javascript-get-extension-from-base64-image
+   */
+  switch(base64content[0]){
+    case '/' :
+      return '.jpg';
+    case 'i' :
+        return '.png';
+    case 'R' :
+      return '.gif';
+    case 'U' :
+      return '.webp';
+    default:
+      return 'extension';
+  }
+
 }
 
 // -------------------------------------------------------
