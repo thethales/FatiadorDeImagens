@@ -3,6 +3,7 @@ var srcTestImage = 'testing/Ensaio de Feed 1.png';
 var defaultNumColsToCut = 3;
 var defaultNumRowsToCut = 4;
 var defaultOutputDivID = 'slicedElements';
+var defaultWidthHeightTable = 'tabelaWidthHeight';   //Descreve o ID da tabela de Largura e Altura de cada fatia
 
 var slicer = {
   numColsToCut: defaultNumColsToCut,
@@ -23,11 +24,13 @@ var fileInput   = document.getElementById('inputImageToSlice');
 var colInput    = document.getElementById('inputTxtCols');
 var rowInput    = document.getElementById('inputTxtRows');
 var btnFatiar   = document.getElementById('btnFatiar');
-var btnDownload = document.getElementById('btnDownload');
 var btnTeste    = document.getElementById('btnTeste');
+var btnDownload = document.getElementById('btnDownload');
 var dropArea           = document.getElementById('dropArea');
 var slicedElementsArea = document.getElementById('slicedElements');
 var containerSlicedElements = document.getElementById('containerSlicedElements');
+
+
 
 var eImagesWereInserted = new CustomEvent("imagesWereInserted", {
   "detail": "As imagens foram inseridas no DOM"
@@ -49,7 +52,7 @@ rowInput.addEventListener('change', printGrid);
 image.addEventListener('load', loadImage);
 btnFatiar.addEventListener('click', calculateSliceParamenters);
 btnFatiar.addEventListener('click', printGrid);
-//btnDownload.addEventListener('click', downloadImages);
+btnDownload.addEventListener('click', downloadImages);
 dropArea.addEventListener('drop', droppedImage, false);
 
 
@@ -127,9 +130,6 @@ function sliceImage() {
 
 }
 
-function downloadImages() {
-  //base64toBlob(imageSlices[0],'png')
-}
 
 function insertImage(outputDivId, imgURLs) {
   console.log('Inserindo Imagens');
@@ -171,9 +171,27 @@ function insertImage(outputDivId, imgURLs) {
   document.dispatchEvent(eImagesWereInserted);
 }
 
-//UI
+
+function downloadImages(){
+  
+  var zip = new JSZip();
+  var img = zip.folder("images");
+  for(var i=0; i<imageSlices.length; i++){
+    let imgData = imageSlices[i];
+    img.file(i+".jpg", imgData.replace(/^data:image\/(png|jpg);base64,/, ""), {base64: true});
+
+  }
+  zip.generateAsync({type:"blob"})
+  .then(function(content) {
+      // see FileSaver.js
+      saveAs(content, "fatias.zip");
+  });
+}
+
+// UI
 
 function printGrid() {
+  printWidthHeightTable();  
   if (image.src == "") {
     printGridMockup();
   } else {
@@ -204,8 +222,13 @@ function calculateSliceParamenters() {
     }
   }
 
+ 
+
   widthOfSlice = image.width / slicer.numColsToCut;
   heightOfSlice = image.height / slicer.numRowsToCut;
+  
+
+
   printImageSettingsToUI({
     "Largura da Fatia": widthOfSlice,
     "Altura da Fatia": heightOfSlice,
@@ -221,14 +244,60 @@ function printImageSettingsToUI(imgSettingsObj) {
 
 }
 
+
+function printWidthHeightTable(){
+  /**
+   * Gera uma tabela de Inputs para preenchimento e customização de largura e altura
+   */
+  //if(defaultWidthHeightTable){
+    let outputTable = document.getElementById(defaultWidthHeightTable);
+    let cols = slicer.numColsToCut;
+    let rows = slicer.numRowsToCut;
+    let slices = cols * rows;
+
+    elementEmpty(defaultWidthHeightTable);
+
+    for (var r = 0; r <= rows; r++) {
+      let newDivRow = document.createElement("div");
+      newDivRow.setAttribute("class", "row");
+      newDivRow.setAttribute("id", "tableRow" + r);
+      outputTable.appendChild(newDivRow);
+    }
+
+    let rw = 0;
+    for (var i = 0; i < slices; ++i) {
+      let newDiv = document.createElement("div");
+      let newInputSliceHeight = document.createElement("input");
+      let newInputSliceWidth = document.createElement("input");
+      let newSpan = document.createElement("span");
+
+      outputTable = document.getElementById("tableRow" + rw);
+      newDiv.setAttribute("class", "col-sm");
+      newInputSliceHeight.setAttribute("class","input-sm slice-input");
+      newInputSliceWidth.setAttribute("class","input-sm slice-input");
+      newSpan.innerText = i;
+      newDiv.appendChild(newSpan);
+      newDiv.appendChild(newInputSliceWidth);
+      newDiv.appendChild(newInputSliceHeight);
+      outputTable.appendChild(newDiv);
+      rw++;
+      if (rw == rows) {
+        rw = 0;
+      }
+    }
+
+  //}
+  
+}
+
 function printGridMockup() {
   calculateSliceParamenters();
   elementEmpty(defaultOutputDivID);
-  var outputDiv = document.getElementById(defaultOutputDivID);
-  var cols = slicer.numColsToCut;
-  var rows = slicer.numRowsToCut;
-  var slices = cols * rows;
-  var sliceWidth = (outputDiv.offsetWidth /cols)+'px';
+  let outputDiv = document.getElementById(defaultOutputDivID);
+  let cols = slicer.numColsToCut;
+  let rows = slicer.numRowsToCut;
+  let slices = cols * rows;
+  let sliceWidth = (outputDiv.offsetWidth /cols)+'px';
 
   for (var r = 0; r < rows; r++) {
     let newDivRow = document.createElement("div");
@@ -302,3 +371,8 @@ function preventDefaults (e) {
   e.preventDefault()
   e.stopPropagation()
 }
+
+// -------------------------------------------------------
+
+
+

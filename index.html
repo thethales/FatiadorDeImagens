@@ -10,10 +10,10 @@
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="vendor/css/styles.css" rel="stylesheet" />
-  <link href="vendor/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="vendor/css/bootstrap-utilities.css" rel="stylesheet" />
-
+  <link href="src/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="src/vendor/bootstrap/css/bootstrap-utilities.css" rel="stylesheet" />
+  <link href="src/vendor/bootstrap/css/styles.css" rel="stylesheet" />
+  
   <!-- Custom CSS -->
   <link href="src/style.css" rel="stylesheet" />
 </head>
@@ -38,7 +38,7 @@
           <div class="form-group col-sm-12">
 
             <div class="row">
-              <div class="col col-sm-6">
+              <div class="col col-sm-5">
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Colunas</span>
@@ -48,7 +48,7 @@
                 </div>
               </div>
 
-              <div class="col col-sm-6">
+              <div class="col col-sm-5">
                 <div class="input-group mb-1 ">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Linhas</span>
@@ -59,9 +59,22 @@
 
               </div>
 
+              <div class="col col-sm-2">
+                <button class="btn btn-primary" id="btnCustomizar" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  <span class="sr-only">*</span>
+                </button>
+              </div>
             </div>
+            
+            
             <div class="row">
+              <div class="collapse" id="collapseCustomizacoes">
+                <div class="card card-body" id="tabelaWidthHeight">
+                </div>
+              </div>
+            </div>
 
+            <div class="row">
               <div class="col col-sm-12" id="loadArea">
                 <form class="dropForm">
 
@@ -74,6 +87,9 @@
                     <span class="sr-only"
                       alt="Fatiar a imagem seleciona no numero de colunas e linhas especificadas">Pré
                       Visualizar</span>
+                  </button>
+                  <button id="btnDownload" type="button" class="btn btn-primary processingButton">
+                    <span class="sr-only">Download</span>
                   </button>
 
                 </form>
@@ -92,9 +108,7 @@
         <div class="separador">Fatiador de Imagens</div>
         <div class="arrow-up"></div>
       </div>
-      <!--<button id="btnDownload" type="button" class=" invisible btn-primary processingButton">
-              <span class="sr-only">Download</span>
-            </button>-->
+      
       <div class="col-sm-7">
         <img id="slicedImage"></img>
         <div class="container" id="containerSlicedElements">
@@ -107,9 +121,32 @@
 
     </div>
     <!-- Bootstrap core JS-->
-    <script src="vendor/js/bootstrap.bundle.min.js"></script>
+    <script src="src/vendor/jquery/jquery-3.6.0.min.js"></script>
+    <script src="src/vendor/bootstrap/js/popper.min.js"></script>
+    <script src="src/vendor/bootstrap/js/bootstrap.min.js"></script>
+        
+    
+    
+    <!-- JSZip Plugin-->
+    <script src="src/vendor/jszip/jszip.min.js"></script>
+    <script src="src/vendor/jszip/FileSaver.js"></script>
     <!-- Custom JS -->
     <script src="src/script.js"></script>
+  
+    <script>
+
+       /* $("#btnCustomizar").click(function(){
+            printWidthHeightTable();
+            $("#collapseCustomizacoes").collapse('toggle');
+        });*/
+
+
+     
+
+        
+
+
+    </script>
 </body>
 
 </html>

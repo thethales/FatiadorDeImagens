@@ -94,3 +94,11 @@ p {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.slice-input{
+  width: 50px;
+}
+
+#tabelaWidthHeight span{
+  font-size: xx-small;
+}
