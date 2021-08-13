@@ -6,11 +6,18 @@ var defaultOutputDivID = 'slicedElements';
 var defaultWidthHeightTable = 'tabelaWidthHeight';   //Descreve o ID da tabela de Largura e Altura de cada fatia
 
 var slicer = {
+  file: {
+    name : ""
+  },
   numColsToCut: defaultNumColsToCut,
   numRowsToCut: defaultNumRowsToCut,
   resetSlicesColsRows: function () {
     this.numColsToCut = defaultNumColsToCut;
     this.numRowsToCut = defaultNumRowsToCut;
+  },
+  zip: {
+    default_folder_name: 'imagens',
+    default_zip_name: 'fatias.zip'
   }
 }
 
@@ -52,13 +59,21 @@ rowInput.addEventListener('change', printGrid);
 image.addEventListener('load', loadImage);
 btnFatiar.addEventListener('click', calculateSliceParamenters);
 btnFatiar.addEventListener('click', printGrid);
-btnDownload.addEventListener('click', downloadImages);
+btnDownload.addEventListener('click', 
+  function(){
+    if(imageSlices.length > 0){                                  
+      downloadImages(slicer.zip.default_zip_name,slicer.zip.default_folder_name);
+    }else{
+      uiMessage(10);
+    }
+  });
 dropArea.addEventListener('drop', droppedImage, false);
 
 
 image.onload = function () {
   ctx.drawImage(image, 200, 200);
   console.log("Imagem carregada: " + this.width + '-' + this.height)
+  console.log(this.name)
 }
 
 document.querySelectorAll('.processingButton').forEach(item => {
@@ -172,10 +187,18 @@ function insertImage(outputDivId, imgURLs) {
 }
 
 
-function downloadImages(){
-  
+function downloadImages(zipName,slicesFolderName){
+  /**
+   * Gera e gatilha o download de um arquivo ZIP contendo todas as imagens
+   * @param {string} zipName Nome do arquivo ZIP
+   * @param {string} slicesFolderName Nome pasta contendo arquivos fatiados
+   */
+
+  zipName = isEmpty(zipName) ? 'fatias.zip' : zipName;
+  slicesFolderName = isEmpty(slicesFolderName) ? 'fatias' : slicesFolderName;
+
   var zip = new JSZip();
-  var img = zip.folder("images");
+  var img = zip.folder(slicesFolderName);
   for(var i=0; i<imageSlices.length; i++){
     let imgData = imageSlices[i];
     img.file(i+".jpg", imgData.replace(/^data:image\/(png|jpg);base64,/, ""), {base64: true});
@@ -184,11 +207,11 @@ function downloadImages(){
   zip.generateAsync({type:"blob"})
   .then(function(content) {
       // see FileSaver.js
-      saveAs(content, "fatias.zip");
+      saveAs(content, zipName);
   });
 }
 
-// UI
+//--UI--------------------------------------------------------------------------- 
 
 function printGrid() {
   printWidthHeightTable();  
@@ -241,9 +264,7 @@ function calculateSliceParamenters() {
 
 function printImageSettingsToUI(imgSettingsObj) {
   console.log(imgSettingsObj); //Do pretty stuff instead
-
 }
-
 
 function printWidthHeightTable(){
   /**
@@ -351,6 +372,21 @@ function unhighlightDropArea(e) {
   containerSlicedElements.classList.remove('highlight')
 }
 
+function uiMessage(event){
+  /**
+   * Gerencia mensagens de Tela
+   * @param {integer} event - Código do Evento de Messageria
+   * @return {object}
+   */
+
+   switch(event){
+     case 10:
+       alert("É necessário selecionar e fatiar uma imagem antes de poder baixa-la");
+       return null;
+      break;
+   }
+
+ }
 
 // Auxiliares
 
