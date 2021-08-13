@@ -22,7 +22,8 @@ var slicer = {
 }
 
 var uiMsgList = {
-  TooManyDamnColumns: "Atenção, um número de colunas ou linhas superior a 100 poderá gerar baixo desempenho ou travar a página. Você tem certeza que deseja prosseguir ?"
+  TooManyDamnColumns: "Atenção, um número de colunas ou linhas superior a 100 poderá gerar baixo desempenho ou travar a página. Você tem certeza que deseja prosseguir ?",
+  NeedImageBeforeDownload: "É necessário selecionar e fatiar uma imagem antes de poder baixa-la"
 }
 
 //Elements
@@ -381,7 +382,7 @@ function uiMessage(event){
 
    switch(event){
      case 10:
-       alert("É necessário selecionar e fatiar uma imagem antes de poder baixa-la");
+       alert(uiMsgList.NeedImageBeforeDownload);
        return null;
       break;
    }
